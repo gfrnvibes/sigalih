@@ -1,21 +1,33 @@
-<div class="container mt-5">
-    {{-- KABAR DESA --}}
-    <div class="row justify-content-between mb-5">
-        <div class="col">
-            <h2 class="fw-bold">Kabar Desa</h2>
+<div class="container p-4">
+    {{-- HERO KABAR DESA --}}
+    <div class="hero hero--news mb-4">
+        <div class="d-flex align-items-center gap-3">
+            <div class="d-none d-md-block">
+                <div class="hero-badge">
+                    <i class="fas fa-newspaper"></i>
+                </div>
+            </div>
+            <div class="flex-grow-1">
+                <nav aria-label="breadcrumb" class="mb-2">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="{{ url('/') }}">Beranda</a></li>
+                        <li class="breadcrumb-item active fw-semibold" aria-current="page">Kabar Desa</li>
+                    </ol>
+                </nav>
+                <h1 class="fw-bold h3 h2-md mb-2 d-flex align-items-center gap-2">Kabar Desa</h1>
+                <p class="text-secondary mb-0">Update kegiatan, pengumuman, dan info terbaru dari desa. Stay in the
+                    loop!
+                </p>
+            </div>
         </div>
-        {{-- <div class="col d-flex align-items-center justify-content-end">
-            <form class="d-flex w-100" role="search">
-                <input class="form-control me-2" type="search" placeholder="Cari berita" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Cari</button>
-            </form>
-        </div> --}}
+        <div class="hero-blob" aria-hidden="true"></div>
     </div>
+
 
     {{-- BERITA --}}
     <div class="row justify-content-between">
         {{-- Berita Terbaru --}}
-        <div class="col-5">
+        <div class="col-12 col-md-5 mb-4">
             <h5 class="mb-3">Berita Terbaru</h5>
             @foreach ($post as $item)
                 <a href="{{ route('show', $item->slug) }}">
@@ -25,8 +37,7 @@
                             <h4 class="card-title fw-bold">{{ $item->title }}</h4>
                             <p class="card-text">
                                 <small class="text-secondary">
-                                    <i
-                                        class="fas fa-calendar-alt me-2"></i>{{ $item->created_at->format('l, M Y') }}
+                                    <i class="fas fa-calendar-alt me-2"></i>{{ $item->created_at->format('l, M Y') }}
                                 </small>
                             </p>
                             <p class="card-text">{!! Str::limit($item->content, 200) !!} </p>
@@ -37,14 +48,14 @@
         </div>
 
         {{-- Berita Lainnya --}}
-        <div class="col-6">
+        <div class="col-12 col-md-6">
             <h5 class="mb-3">Berita Lainnya</h5>
             <div class="row gap-3">
                 @foreach ($posts as $post)
                     <div class="row align-items-center">
                         <div class="col-auto">
-                            <img src="{{ Storage::url($post->image) }}"
-                                class="" alt="" style="width: 160px;">
+                            <img src="{{ Storage::url($post->image) }}" class="" alt=""
+                                style="width: 160px;">
                         </div>
                         <div class="col">
                             <h6 class="fw-bold">{{ $post->title }}</h6>

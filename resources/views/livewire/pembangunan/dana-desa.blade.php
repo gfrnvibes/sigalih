@@ -1,13 +1,32 @@
-<div class="container p-5">
-    <h3 class="fw-bold mb-5">Transparansi APB Desa</h3>
+<div class="container p-4">
+    <div class="hero hero--transparansi mb-4">
+        <div class="d-flex align-items-start align-items-center gap-3">
+            <div class="d-none d-md-block">
+                <div class="hero-badge">
+                    <i class="fas fa-balance-scale"></i>
+                </div>
+            </div>
+            <div>
+                <nav aria-label="breadcrumb" class="mb-1">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="{{ url('/') }}">Beranda</a></li>
+                        <li class="breadcrumb-item active fw-semibold" aria-current="page">Transparansi</li>
+                    </ol>
+                </nav>
+                <h1 class="fw-bold h2-md mb-1">Transparansi Desa</h1>
+                <p class="text-secondary mb-0">Laporan anggaran, realisasi, dan info keterbukaan publik.</p>
+            </div>
+        </div>
+    </div>
 
-    <div class="row gap-5">
-        <div class="col" height="600px">
+    <div class="row gap-5 flex-column-reverse flex-md-row">
+        <div class="col-12 col-md-6">
+            <h5 class="mb-3">Infografis Laporan APB Desa</h5>
             <div id="carouselDanaDesa" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     @forelse ($transparansis as $item)
-                        <div class="carousel-item @if ($loop->first) active @endif">
-                            <img src="{{ Storage::url($item->infografik) }}" class="w-100"
+                        <div class="carousel-item border @if ($loop->first) active @endif" >
+                            <img src="{{ Storage::url($item->infografik) }}" class="img-fluid"
                                 alt="{{ $item->keterangan }}">
                             {{-- <div class="carousel-caption d-none d-md-block">
                                     <h5 class="fw-bold">{{ $item->keterangan }}</h5>
@@ -36,20 +55,20 @@
             </div>
 
         </div>
-        <div class="col-4">
+        <div class="col-12 col-md-4">
             <h5 class="mb-3">Download Laporan APB Desa</h5>
             @forelse ($transparansis as $item)
-                <div class="card mb-3 shadow-sm">
+                <div class="card shadow-sm">
                     <div class="card-body p-3">
-                            <h5 class="fw-bold">{{ $item->keterangan }}</h5>
-                            <div class="d-flex justify-content-between">
-                                <div>
-                                    <small>Tahun : {{ $item->tahun }}</small>
-                                </div>
-                                <a href="{{ Storage::url($item->dokumen) }}" class="me-5" target="_blank" download>
-                                    <small>Download Laporan</small>
-                                </a>
+                        <h5 class="fw-bold">{{ $item->keterangan }}</h5>
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <small>Tahun : {{ $item->tahun }}</small>
                             </div>
+                            <a href="{{ Storage::url($item->dokumen) }}" class="me-5" target="_blank" download>
+                                <small>Download Laporan</small>
+                            </a>
+                        </div>
                     </div>
                 </div>
             @empty

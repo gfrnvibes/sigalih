@@ -1,144 +1,161 @@
-body {
-    font-family: "Noto Sans JP", sans-serif;
+/* =========================
+   GLOBAL (tipografi & util)
+   ========================= */
+body { font-family: "Noto Sans JP", sans-serif; }
+h1,h2,h3,h4,h5,h6 {
+  font-family: "Radio Canada Big", sans-serif;
+  color: rgb(78,78,78);
+}
+a { text-decoration: none; }
+.min-h-screen { min-height: 90vh; }
+.center { width: 150px; margin: 40px auto; }
+
+/* =========================
+   HERO BASE (satu untuk semua)
+   ========================= */
+.hero {
+  /* default tokens (bisa dioverride tema) */
+  --hero-gradient: linear-gradient(135deg, #e3f2fd 0%, #d1fae5 100%);
+  --hero-badge-bg: rgba(255,255,255,.65);
+  --hero-badge-border: rgba(0,0,0,.06);
+
+  background: var(--hero-gradient);
+  border-radius: 1rem;            /* ~rounded-4 */
+  padding: 2rem;                  /* p-4 / p-md-5 terserah di HTML */
+  position: relative;
+  overflow: hidden;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: "Radio Canada Big", sans-serif;
-    color: rgb(78, 78, 78);
+/* Layout dalam hero: kiri (badge+title), kanan (aksi/search) */
+.hero__inner {
+  display: flex;
+  align-items: center;            /* <-- icon + text center vertikal */
+  justify-content: space-between;
+  gap: 1rem;
 }
 
-.min-h-screen {
-    min-height: 90vh;
+/* Responsive stack di mobile */
+@media (max-width: 991.98px) {    /* < lg */
+  .hero__inner { flex-direction: column; align-items: stretch; }
 }
 
-.center{
-    width: 150px;
-      margin: 40px auto;
-      
-    }
-
-a {
-    text-decoration: none;
-    /* color: rgb(69, 98, 177); */
+/* =========================
+   HERO PARTS
+   ========================= */
+.hero-badge {
+  width: 48px; height: 48px; flex: 0 0 48px;
+  display: inline-flex; align-items: center; justify-content: center; /* center icon */
+  border-radius: .5rem;
+  background: var(--hero-badge-bg);
+  border: 1px solid var(--hero-badge-border);
+  font-size: 1.25rem;
+  backdrop-filter: blur(6px);
 }
 
-.link-decoration {
-    color: black;
+/* Judul responsif */
+.h2-md { font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem); }
+
+/* Input glassy di atas gradient */
+.hero-input {
+  background: rgba(255,255,255,.65);
+  border: 1px solid rgba(0,0,0,.06);
+  box-shadow: 0 1px 0 rgba(0,0,0,.03) inset;
+  backdrop-filter: blur(6px);
 }
+.hero-input::placeholder { color: rgba(0,0,0,.45); }
+
+/* Search form: rapi di kanan desktop, full width di mobile */
+.hero-search { display: flex; gap: .5rem; }
+.hero-search .form-control { min-width: 0; }
+@media (max-width: 991.98px) {
+  .hero-search { flex-wrap: wrap; }
+  .hero-search .form-control { flex: 1 1 100%; }
+  .hero-search .btn { width: 100%; }
+}
+
+/* Opsional helper posisi sticky (dipakai kalau perlu) */
+@media (min-width: 992px) {
+  .position-lg-sticky { position: sticky; }
+  .top-lg-20 { top: 20px; }
+}
+
+/* =========================
+   THEMES (cukup ganti class)
+   ========================= */
+.hero--primary {
+  --hero-gradient: linear-gradient(135deg, #e0f2fe 0%, #d1fae5 100%); /* Layanan */
+}
+
+.hero--news {
+  --hero-gradient: linear-gradient(135deg, #fef3c7 0%, #ede9fe 100%); /* Kabar Desa */
+}
+
+.hero--transparansi {
+  --hero-gradient: linear-gradient(135deg, #d1fae5 0%, #bfdbfe 100%); /* Transparansi */
+}
+
+.hero--neutral {
+  --hero-gradient: linear-gradient(135deg, rgba(0,0,0,.04), rgba(0,0,0,.02));
+}
+
+/* =========================
+   KOMPONEN LAIN (non-hero)
+   ========================= */
+.link-decoration { color: black; }
 
 .bg-login {
-    background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+  background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
 }
 
-.card-grow {
-    transition: transform 0.2s ease-in-out;
-    border: none;
-}
+.card-grow { transition: transform .2s ease-in-out; border: none; }
+.card-grow:hover { transform: scale(1.05); }
 
-.card-grow:hover {
-    transform: scale(1.05);
-}
+.card-hover { transition: transform .2s ease, box-shadow .2s ease; }
+.card-hover:hover { transform: translateY(-6px); box-shadow: 0 8px 20px rgba(0,0,0,.12); }
 
-/* .card {
-    border: none;
-    border-radius: 16px;
-} */
+.card-img-top { border-top-left-radius: 16px; border-top-right-radius: 16px; }
 
-.card-img-top {
-    border-top-left-radius: 16px;
-    border-top-right-radius: 16px;
-}
-
-/* .btn {
-    border-radius: 48px;
-} */
-
-.timeline-with-icons {
-    border-left: 1px solid hsl(0, 0%, 90%);
-    position: relative;
-    list-style: none;
-}
-
-.timeline-with-icons .timeline-item {
-    position: relative;
-}
-
-.timeline-with-icons .timeline-item:after {
-    position: absolute;
-    display: block;
-    top: 0;
-}
-
+.timeline-with-icons { border-left: 1px solid hsl(0,0%,90%); position: relative; list-style: none; }
+.timeline-with-icons .timeline-item { position: relative; }
+.timeline-with-icons .timeline-item:after { position: absolute; display: block; top: 0; }
 .timeline-with-icons .timeline-icon {
-    position: absolute;
-    left: -48px;
-    background-color: hsl(217, 88.2%, 90%);
-    color: hsl(217, 88.8%, 35.1%);
-    border-radius: 50%;
-    height: 31px;
-    width: 31px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  position: absolute; left: -48px; height: 31px; width: 31px;
+  display: flex; align-items: center; justify-content: center;
+  background-color: hsl(217,88.2%,90%); color: hsl(217,88.8%,35.1%);
+  border-radius: 50%;
 }
 
+.nav-item { margin-left: 10px; }
 
-.nav-item {
-    margin-left: 10px; /* Tambahkan jarak antar item menu */
+/* kartu background lembut */
+.card-bg, .card-bg2 {
+  background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
 }
 
-.card-bg {
-    background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
-}
-.card-bg2 {
-    background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
-}
-
-/* CSS khusus untuk tab aktif dan tidak aktif */
-.nav-item .btn {
-    transition: background-color 0.3s ease, color 0.3s ease; /* animasi halus untuk transisi warna */
-}
-
+/* Tabs aktif/non-aktif */
+.nav-item .btn { transition: background-color .3s ease, color .3s ease; }
 .nav-item .btn[aria-selected="true"] {
-    background-color: #198754; /* warna hijau untuk tombol aktif */
-    color: white; /* warna teks putih untuk tombol aktif */
-    font-weight: 700;
+  background-color: #198754; color: #fff; font-weight: 700;
 }
-
 .nav-item .btn[aria-selected="false"] {
-    background-color: #f8f9fa; /* warna light untuk tombol tidak aktif */
-    color: #212529; /* warna teks default untuk tombol tidak aktif */
+  background-color: #f8f9fa; color: #212529;
 }
 
-/* .form-control {
-    border-radius: 18px;
-} */
+.dropdown-menu { border: none; }
 
-.dropdown-menu {
-    border: none;
-}
-
+/* Background transparan (fix: pakai background-image, bukan background-color) */
 .transparent-background {
-    background-color: url('https://www.toptal.com/designers/subtlepatterns/uploads/leaves.png');
-    opacity: 50%;
+  background-image: url("https://www.toptal.com/designers/subtlepatterns/uploads/leaves.png");
+  opacity: .5;
 }
 
+/* Cover image */
 .bg-image {
-    
-    background-image: url('https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/desa.jpg');
-    height: 400px;
-    object-fit: cover;
-        
+  background-image: url("https://kertamulya-padalarang.desa.id/assets/files/data/website-desa-kertamulya-3217082001/desa.jpg");
+  height: 400px; background-size: cover; background-position: center;
 }
 
-.number {
-        /* Hide the arrows in number input */
-        input[type=number]::-webkit-outer-spin-button,
-        input[type=number]::-webkit-inner-spin-button {
-          -webkit-appearance: none;
-          margin: 0;
-        }
-        input[type=number] {
-          appearance: textfield;
-        }
-}
+/* Number input: hide arrows */
+.number input[type="number"]::-webkit-outer-spin-button,
+.number input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.number input[type="number"] { appearance: textfield; }

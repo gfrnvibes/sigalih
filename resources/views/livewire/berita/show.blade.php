@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<div class="container mt-md-5 p-4 p-md-3">
     <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);"
         aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -9,13 +9,24 @@
 
     {{-- Body --}}
     <div class="row mt-3 gap-5">
-        <div class="col-8">
+        <div class="col-12 col-md-7">
+            <div class="">
                 <h2 class="fw-bold">{{ $post->title }}</h2>
-            <p class="text-secondary"><i class="fas fa-calendar-alt text-secondary"></i>&nbsp;&nbsp;&nbsp;{{ $post->created_at->translatedFormat('l, d M Y') }} &nbsp;&nbsp; <i class="fas fa-user text-secondary"></i>&nbsp;&nbsp;&nbsp;Admin</p>
-            <img src="{{ Storage::url($post->image)}}"
-                alt="{{ $post->image }}" class="rounded" style="width: 800px"> 
-            <div class="col-10 mt-5 lh-lg">{{ $post->content }}</div>
-            {{-- <hr class="mt-5 mb-3">
+                <p class="text-secondary">
+                    <i
+                        class="fas fa-calendar-alt text-secondary"></i>&nbsp;&nbsp;&nbsp;{{ $post->created_at->translatedFormat('l, d M Y') }}
+                    &nbsp;&nbsp; <i class="fas fa-user text-secondary"></i>&nbsp;&nbsp;&nbsp;Admin
+                </p>
+            </div>
+            <div>
+                <img src="{{ Storage::url($post->image) }}" alt="{{ $post->image }}" class="rounded img-fluid"
+                    style="width: 800px">
+            </div>
+            <div class="mt-3 mt-md-5 lh-lg">
+                <p style="text-align: justify;">{{ $post->content }}</p>
+            </div>
+            {{--
+            <hr class="mt-5 mb-3">
             <a href="">
                 <div class="d-inline-flex align-items-center gap-3">
                     <i class="far fa-thumbs-up fs-3"></i>
@@ -48,7 +59,7 @@
                     <p class="align-items-center fw-bold">Anonymous</p>
                     <p>Parah Banget Jir</p>
                     <a href="">
-                        <small>Suka</small> 
+                        <small>Suka</small>
                         <small>Balas</small>
                     </a>
                 </div>
@@ -56,19 +67,18 @@
             <hr class="text-secondary"> --}}
 
         </div>
-        <div class="col">
+        <div class="col-12 col-md-4">
             <h5 class="mb-3">Kabar Lainnya</h5>
             <div class="row gap-3">
-                @foreach ($posts as $item)                    
-                <div class="row align-items-center">
-                    <div class="col-auto">
-                        <img src="{{ Storage::url($item->image) }}"
-                            class="rounded-2" alt="" style="width: 160px;">
+                @foreach ($posts as $item)
+                    <div class="row align-items-center">
+                        <div class="col-auto">
+                            <img src="{{ Storage::url($item->image) }}" class="rounded-2" alt="" style="width: 160px;">
+                        </div>
+                        <div class="col">
+                            <h6 class="fw-bold">{!! $item->title !!}</h6>
+                        </div>
                     </div>
-                    <div class="col">
-                        <h6 class="fw-bold">{!! $item->title !!}</h6>
-                    </div>
-                </div>
                 @endforeach
             </div>
         </div>
@@ -80,5 +90,6 @@
                 });
             });
         </script>
-        
+
     </div>
+    <div>
